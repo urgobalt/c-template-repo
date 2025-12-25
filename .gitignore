@@ -1,0 +1,6 @@
+# Tooling
+/.direnv
+compile_commands.json
+
+# Output files
+/.cache
