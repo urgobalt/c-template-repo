@@ -4,3 +4,5 @@ compile_commands.json
 
 # Output files
 /.cache
+/out/*
+!/out/.gitkeep
