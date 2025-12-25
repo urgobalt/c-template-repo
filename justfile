@@ -1,7 +1,6 @@
 # This build functionality does not strictly support windows. To support full functionality please use wsl.
 
 set dotenv-load
-set export
 
 set shell := ["bash", "-c"]
 
@@ -10,6 +9,7 @@ src := "./src/main.c"
 output := "./out/main"
 
 # Flags that is included at different compilation commands
+cxx := "ccache clang"
 libs := ""
 common_flags := "-Wall -Wextra -pedantic"
 debug_flags := f"-g"
@@ -23,19 +23,19 @@ default: debug
 # Build the program for debug
 [group("debug")]
 debug:
-  ccache clang  $common_flags $debug_flags -o $output $src $libs
+  {{cxx}} {{common_flags}} {{debug_flags}} -o {{output}} {{src}} {{libs}}
 
 # Build for debug and then run it
 [group("debug")]
 run: debug
-  $output
+  {{output}}
 
 # Build for release
 [group("release")]
 release:
-  ccache clang  $common_flags $release_flags -o $output $src $libs
+  {{cxx}} {{common_flags}} {{release_flags}} -o {{output}} {{src}} {{libs}}
 
 # Generate compile_commands.json
 [group("tooling"), linux]
 database:
-  bear -- just debug
+  bear -- {{cxx}} {{common_flags}} {{debug_flags}} -o {{output}} {{src}} {{libs}}
