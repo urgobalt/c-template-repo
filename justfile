@@ -1,5 +1,9 @@
+# This build functionality does not strictly support windows. To support full functionality please use wsl.
+
 set dotenv-load
 set export
+
+set shell := ["bash", "-c"]
 
 # Source code and output file
 src := "./src/main.c"
@@ -32,6 +36,6 @@ release:
   ccache clang  $common_flags $release_flags -o $output $src $libs
 
 # Generate compile_commands.json
-[group("tooling")]
+[group("tooling"), linux]
 database:
   bear -- just debug
