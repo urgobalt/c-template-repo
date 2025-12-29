@@ -7,10 +7,12 @@ set shell := ["bash", "-c"]
 src := "./src/main.c"
 output := "./out/main"
 
+std := "c17"
+
 # Flags that is included at different compilation commands
 cxx := "ccache clang"
 libs := ""
-common_flags := "-Wall -Wextra -pedantic"
+common_flags := f"-std={{std}} -Wall -Wextra -pedantic"
 debug_flags := f"-g"
 release_flags := f"-Werror=unused -O3"
 
